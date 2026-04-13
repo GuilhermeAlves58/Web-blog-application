@@ -10,9 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let posts = [];
 
 function post(titulo, comentario) {
+    this.id = Date.now();
     this.title = titulo;
     this.comment = comentario;
-};
+}
 
 
 app.get("/", (req, res) => {
@@ -29,6 +30,28 @@ app.post("/create", (req, res) => {
 
     res.redirect("/");
 });   
+
+app.get("/edit/:id", (req,res) => {
+    const post = posts.find(p => p.id == req.params.id);
+    res.render("edit.ejs", {post});
+});
+
+app.post("/edit/:id", (req,res) => {
+    const post = posts.find(p => p.id == req.params.id);
+
+    post.title = req.body.title;
+    post.comment = req.body.comment;
+
+    console.log(req.params.id);
+    console.log(posts);
+
+    res.redirect("/");
+});
+
+app.post("/delete/:id", (req, res) => {
+    posts = posts.filter(p => p.id != req.params.id);
+    res.redirect("/");
+});
 
 app.listen(port, () => {
     console.log("Server running");

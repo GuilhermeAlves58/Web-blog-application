@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>edit</title>
+</head>
+
+<body>
+    <% if (locals.post) { %>
+        <form action="/edit/<%= post.id %>" method="post">
+            <input type="text" name="title" value="<%= post.title %>">
+            <input type="text" name="comment" value="<%= post.comment %>">
+            <button type="submit">Salvar</button>
+        </form>
+        <% } %>
+
+</body>
+
+</html>

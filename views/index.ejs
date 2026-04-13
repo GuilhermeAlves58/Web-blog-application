@@ -4,24 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Home</title>
 </head>
 
 <body>
     <h1>Todos os Post</h1>
 
-    <a href="/create">
-        <button>Novo Post</button>
-    </a>
+    <div class="actions">
+        <a href="/create">
+            <button>Novo Post</button>
+        </a>
+    </div>
+
+
 
     <% if (locals.posts) { %>
         <% posts.forEach(post=> { %>
-            <h2>
-                <%= post.title %>
-            </h2>
-            <p>
-                <%= post.comment %>
-            </p>
+            <div class="posts">
+                <h2>
+                    <%= post.title %>
+                        <span>
+                            <%= post.id%>
+                        </span>
+                </h2>
+                <p>
+                    <%= post.comment %>
+                </p>
+                <a href="/edit/<%= post.id %>">
+                    <button>editar Post</button>
+                </a>
+                <form action="/delete/<%= post.id %>" method="post">
+                    <button type="submit">Excluir post</button>
+                </form>
+            </div>
             <% })}; %>
 </body>
 
